@@ -14,63 +14,29 @@
       >
         LOG IN
       </v-banner>
+      <v-spacer></v-spacer>
         <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
+          ref="loginForm"
         >
           <v-text-field
-            v-model="name"
-            :counter="10"
-            :rules="nameRules"
-            label="Name"
-            required
+            v-model="user.email"
+            label="Email"
+            name="email"
+            type="text"
           ></v-text-field>
 
           <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
-            required
+            v-model="user.password"
+            label="Password"
+            name="password"
+            type="password"
           ></v-text-field>
 
-          <v-select
-            v-model="select"
-            :items="items"
-            :rules="[v => !!v || 'Item is required']"
-            label="Item"
-            required
-          ></v-select>
-
-          <v-checkbox
-            v-model="checkbox"
-            :rules="[v => !!v || 'You must agree to continue!']"
-            label="Do you agree?"
-            required
-          ></v-checkbox>
-
           <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
+            color="primary"
+            @click="loginUser()"
           >
-            Validate
-          </v-btn>
-
-          <v-btn
-            color="error"
-            class="mr-4"
-            @click="reset"
-          >
-            Reset Form
-          </v-btn>
-
-          <v-btn
-            color="warning"
-            @click="resetValidation"
-          >
-            Reset Validation
+            Login
           </v-btn>
         </v-form>
       </v-col>
@@ -79,7 +45,28 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: 'Login'
+  name: 'Login',
+  data() {
+    return {
+      user: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    loginUser() {
+      if (this.$refs.loginForm.validate()) {
+        axios
+          .post('http://127.0.0.1:8000/api/login', this.user)
+          .then((response) => {
+            console.log(response.data);
+          })
+      }
+    }
+  }
 }
 </script>
