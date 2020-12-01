@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Login',
@@ -58,12 +58,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      login: 'user/loginUser'
+    }),
     loginUser() {
       if (this.$refs.loginForm.validate()) {
-        axios
-          .post('http://127.0.0.1:8000/api/login', this.user)
-          .then((response) => {
-            localStorage.setItem('token', response.data);
+        this.login(this.user)
+          .then(() => {
             this.$router.push('dashboard');
           })
       }

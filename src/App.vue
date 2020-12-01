@@ -12,21 +12,28 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
-  data: () => ({
-    loggedIn: false,
-  }),
   created() {
-    if (localStorage.getItem('token')) {
-      this.loggedIn = true;
-    }
+    this.checkUserState();
+  },
+  computed: {
+    ...mapGetters({
+      loggedIn: 'user/loggedIn'
+    })
   },
   methods: {
+    ...mapActions({
+      logoutUser: 'user/logoutUser',
+      checkUserState: 'user/setLoggedInState'
+    }),
     logout() {
-      localStorage.removeItem('token');
-      this.$router.push('login');
+      this.logoutUser()
+        .then(() => {
+          this.$router.push('login');
+        });
     }
   }
 };
