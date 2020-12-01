@@ -63,7 +63,8 @@ export default {
         axios
           .post('http://127.0.0.1:8000/api/login', this.user)
           .then((response) => {
-            console.log(response.data);
+            localStorage.setItem('token', response.data);
+            this.$router.push('dashboard');
           })
       }
     }
