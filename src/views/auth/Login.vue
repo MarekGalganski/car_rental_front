@@ -59,13 +59,25 @@ export default {
   },
   methods: {
     ...mapActions({
-      login: 'user/loginUser'
+      login: 'user/loginUser',
+      addNotification: 'application/addNotification'
     }),
     loginUser() {
       if (this.$refs.loginForm.validate()) {
         this.login(this.user)
           .then(() => {
-            this.$router.push('dashboard');
+            this.addNotification({
+              show: true,
+              text: 'Welcome'
+            }).then(() => {
+              this.$router.push('dashboard');
+            })
+          })
+          .catch(() => {
+            this.addNotification({
+              show: true,
+              text: 'Failed to login!'
+            })
           })
       }
     }

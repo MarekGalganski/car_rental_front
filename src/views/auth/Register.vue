@@ -56,27 +56,12 @@
         </v-form>
       </v-col>
     </v-row>
-    <v-snackbar
-      v-model="snackbar.show"
-    >
-      {{ snackbar.text }}
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          color="pink"
-          text
-          v-bind="attrs"
-          @click="snackbar.show = false"
-        >
-          Close
-        </v-btn>
-      </template>
-
-    </v-snackbar>
   </v-container>
 </template>
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Register',
@@ -88,36 +73,35 @@ export default {
         name: '',
         password: '',
         password_confirmation: ''
-      },
-      snackbar: {
-        show: false,
-        text: 'Success'
       }
     }
   },
   methods: {
+    ...mapActions({
+      addNotification: 'application/addNotification'
+    }),
     registerUser() {
       if (this.$refs.registerForm.validate()) {
         axios
           .post('http://127.0.0.1:8000/api/register', this.newUser)
           .then((response) => {
             if (response.data && response.data.success) {
-              this.snackbar = {
+              this.addNotification({
                 show: true,
                 text: 'Success'
-              };
-
-              this.$router.push({
+              }).then(() => {
+                this.$router.push({
                 name: 'login'
+                });
               });
             }
           })
           .catch(() => {
-            this.snackbar = {
-              show: true,
-              text: 'Failed!!'
-            }
-          })
+            this.addNotification({
+                show: true,
+                text: 'Failed!'
+            });
+          });
       }
     }
   }
