@@ -1,27 +1,26 @@
-import axios from 'axios';
+import axios from '../../axios';
 
-const state = {
-  isLoggedIn: false,
-  userDetails: {}
-};
-
-const getters = {
-  loggedIn(state) {
-    return state.isLoggedIn;
-  }
-};
-
-const mutations = {
-  setLoggedIn(state, payload) {
-    state.isLoggedIn = payload;
-  }
-};
-
-const actions = {
+export default {
+  registerUser(context, payload) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('register', payload)
+        .then((response) => {
+          if (response.data) {
+            resolve(response);
+          } else {
+            reject(response);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        })
+    })
+  },
   loginUser(context, payload) {
     return new Promise((resolve, reject) => {
       axios
-        .post('http://127.0.0.1:8000/api/login', payload)
+        .post('login', payload)
         .then((response) => {
           if (response.data.access_token) {
             localStorage.setItem('token', response.data);
@@ -54,11 +53,3 @@ const actions = {
     });
   }
 };
-
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-  getters
-}
