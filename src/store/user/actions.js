@@ -52,10 +52,10 @@ export default {
       resolve(true);
     });
   },
-  me(context) {
+  setUserDetailsState(context) {
     return new Promise((resolve, reject) => {
       axios
-        .get('me')
+        .get('user-details')
         .then((response) => {
           context.commit('setUserDetails', response.data.data);
           resolve(response);

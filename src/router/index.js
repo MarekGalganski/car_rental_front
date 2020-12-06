@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Dashboard from '../views/pages/Dashboard.vue'
+import AuthLayout from '../views/layouts/AuthLayout.vue'
+import AppLayout from '../views/layouts/AppLayout.vue'
 
 import Middlewares from '../middlewares/';
 
@@ -16,29 +18,43 @@ const routes = [
     component: Home
   },
   {
-    path: '/login',
-    name: 'login',
-    component: Login,
-    meta: {
-      middleware: [Middlewares.guest]
-    }
+    path: '/',
+    name: 'auth',
+    component: AuthLayout,
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: Login,
+        meta: {
+          middleware: [Middlewares.guest]
+        }
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: Register,
+        meta: {
+          middleware: [Middlewares.guest]
+        }
+      },
+    ]
   },
   {
-    path: '/register',
-    name: 'register',
-    component: Register,
-    meta: {
-      middleware: [Middlewares.guest]
-    }
+    path: '/',
+    name: 'app',
+    component: AppLayout,
+    children: [
+      {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: Dashboard,
+        meta: {
+          middleware: [Middlewares.auth]
+        }
+      }
+    ]
   },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: Dashboard,
-    meta: {
-      middleware: [Middlewares.auth]
-    }
-  }
 ];
 
 const router = new VueRouter({

@@ -9,7 +9,7 @@
 <script>
 export default {
   mounted() {
-    this.$store.dispatch('user/me');
+    this.$store.dispatch('user/setUserDetailsState');
   },
 }
 </script>

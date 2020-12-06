@@ -1,13 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-btn small @click="logout" v-if="loggedIn">
-        Logout
-      </v-btn>
-    </v-app-bar>
-    <v-main>
-      <router-view></router-view>
-    </v-main>
+    <router-view></router-view>
     <v-snackbar
       @input="updateNotification($event, index)"
       :key="index"
@@ -45,22 +38,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      logoutUser: 'user/logoutUser',
       checkUserState: 'user/setLoggedInState',
       removeNotification: 'application/removeNotification',
       addNotification: 'application/addNotification'
     }),
-    logout() {
-      this.logoutUser()
-        .then(() => {
-          this.addNotification({
-            show: true,
-            text: 'Logged out!'
-          }).then(() => {
-            this.$router.push('login');
-          })
-        });
-    },
     updateNotification(show, index) {
       if (!show) {
         this.removeNotification(index)
