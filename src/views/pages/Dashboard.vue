@@ -5,3 +5,11 @@
     </div>
   </v-container>
 </template>
+
+<script>
+export default {
+  mounted() {
+    this.$store.dispatch('user/me');
+  },
+}
+</script>
