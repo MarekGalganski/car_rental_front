@@ -64,5 +64,37 @@ export default {
           reject(error);
         });
     });
+  },
+  changePassword(context, payload) {
+    return new Promise((resolve, reject) => {
+      axios
+          .put('change-password', payload)
+          .then((response) => {
+            if (response.data.status) {
+              resolve(response);
+            } else {
+              reject(response);
+            }
+          })
+          .catch((error) => {
+            reject(error);
+          });
+    });
+  },
+  updateDetails(context, payload) {
+    return new Promise((resolve, reject) => {
+      axios
+          .put('change-details', payload)
+          .then((response) => {
+            if (response.data.success) {
+              resolve(response);
+            } else {
+              reject(response);
+            }
+          })
+          .catch((error) => {
+            reject(error);
+          });
+    });
   }
 };

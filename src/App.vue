@@ -28,7 +28,11 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'App',
   created() {
-    this.checkUserState();
+    this.checkUserState().then(() => {
+      if (this.loggedIn) {
+        this.addUserDetails();
+      }
+    });
   },
   computed: {
     ...mapGetters({
@@ -40,7 +44,8 @@ export default {
     ...mapActions({
       checkUserState: 'user/setLoggedInState',
       removeNotification: 'application/removeNotification',
-      addNotification: 'application/addNotification'
+      addNotification: 'application/addNotification',
+      addUserDetails: 'user/setUserDetailsState'
     }),
     updateNotification(show, index) {
       if (!show) {

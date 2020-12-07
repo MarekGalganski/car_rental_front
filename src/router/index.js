@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Dashboard from '../views/pages/Dashboard.vue'
+import Profile from '../views/pages/Profile.vue'
+
 import AuthLayout from '../views/layouts/AuthLayout.vue'
 import AppLayout from '../views/layouts/AppLayout.vue'
 
@@ -49,6 +51,14 @@ const routes = [
         path: '/dashboard',
         name: 'dashboard',
         component: Dashboard,
+        meta: {
+          middleware: [Middlewares.auth]
+        }
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: Profile,
         meta: {
           middleware: [Middlewares.auth]
         }
