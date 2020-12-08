@@ -20,31 +20,35 @@
           :value="formValid"
         >
           <v-text-field
-            v-model="newUser.email"
             label="Email"
             name="email"
             type="text"
+            :rules="emailRules"
+            v-model="newUser.email"
           ></v-text-field>
 
           <v-text-field
-            v-model="newUser.name"
             label="Name"
             name="name"
             type="text"
+            :rules="requiredRules"
+            v-model="newUser.name"
           ></v-text-field>
 
           <v-text-field
-            v-model="newUser.password"
             label="Password"
             name="password"
             type="password"
+            :rules="[...requiredRules, ...passwordRules]"
+            v-model="newUser.password"
           ></v-text-field>
 
           <v-text-field
-            v-model="newUser.password_confirmation"
             label="Confirm Password"
             name="password_confirmation"
             type="password"
+            :rules="[...requiredRules, ...passwordRules]"
+            v-model="newUser.password_confirmation"
           ></v-text-field>
 
           <v-btn
@@ -61,9 +65,15 @@
 
 <script>
 import { mapActions } from 'vuex';
+import EmailValidationMixin from '../../mixins/validations/emailValidationMixin.js';
+import PasswordValidationMixin from '../../mixins/validations/passwordValidationMixin.js';
 
 export default {
   name: 'Register',
+  mixins: [
+    EmailValidationMixin,
+    PasswordValidationMixin
+  ],
   data() {
     return {
       formValid: false,

@@ -42,6 +42,7 @@
                 name="name"
                 label="Name"
                 type="text"
+                :rules="requiredRules"
                 v-model="userDetails.name"
               ></v-text-field>
             </v-form>
@@ -73,18 +74,21 @@
                 name="oldPassword"
                 label="Old Password"
                 type="password"
+                :rules="[...requiredRules, ...passwordRules]"
                 v-model="user.oldPassword"
               ></v-text-field>
               <v-text-field
                 name="newPassword"
                 label="New Password"
                 type="password"
+                :rules="[...requiredRules, ...passwordRules]"
                 v-model="user.newPassword"
               ></v-text-field>
               <v-text-field
                 name="newPasswordConfirmation"
                 label="New Password Confirmation"
                 type="password"
+                :rules="[...requiredRules, ...passwordRules, newPasswordConfirmationValidator]"
                 v-model="user.newPasswordConfirmation"
               ></v-text-field>
             </v-form>
@@ -101,8 +105,10 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import PasswordValidationMixin from '../../mixins/validations/passwordValidationMixin.js';
 
 export default {
+  mixins: [PasswordValidationMixin],
   data() {
     return {
       user: {
@@ -158,6 +164,9 @@ export default {
             text: 'Failed to change password!'
           })
         });
+    },
+    newPasswordConfirmationValidator() {
+      return (this.user.newPasswordConfirmation === this.user.newPassword) || 'New password is not confirmed';
     }
   }
 }

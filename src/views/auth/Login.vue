@@ -19,17 +19,19 @@
           ref="loginForm"
         >
           <v-text-field
-            v-model="user.email"
             label="Email"
             name="email"
             type="text"
+            :rules="emailRules"
+            v-model="user.email"
           ></v-text-field>
 
           <v-text-field
-            v-model="user.password"
             label="Password"
             name="password"
             type="password"
+            :rules="requiredRules"
+            v-model="user.password"
           ></v-text-field>
 
           <v-btn
@@ -46,9 +48,15 @@
 
 <script>
 import { mapActions } from 'vuex';
+import EmailValidationMixin from '../../mixins/validations/emailValidationMixin.js';
+import PasswordValidationMixin from '../../mixins/validations/passwordValidationMixin.js';
 
 export default {
   name: 'Login',
+  mixins: [
+    EmailValidationMixin,
+    PasswordValidationMixin
+  ],
   data() {
     return {
       user: {
