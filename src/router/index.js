@@ -16,7 +16,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
@@ -52,7 +52,8 @@ const routes = [
         name: 'dashboard',
         component: Dashboard,
         meta: {
-          middleware: [Middlewares.auth]
+          middleware: [Middlewares.auth, Middlewares.checkPermissions],
+          permissions: ['view-developer-dashboard']
         }
       },
       {
@@ -82,7 +83,7 @@ function nextCheck(context, middleware, index) {
     context.next(...paremeters);
     const nextMidd = nextCheck(context, middleware, index + 1);
 
-    nextMiddleware({context, next: nextMidd});
+    nextMiddleware({...context, next: nextMidd});
   }
 }
 

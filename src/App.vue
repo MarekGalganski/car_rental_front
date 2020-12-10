@@ -30,7 +30,9 @@ export default {
   created() {
     this.checkUserState().then(() => {
       if (this.loggedIn) {
-        this.addUserDetails();
+        this.addUserDetails().then(() => {
+          console.log(this.$can('view-developer-dashboard'));
+        });
       }
     });
   },
