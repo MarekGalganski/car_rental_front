@@ -1,15 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../views/auth/Login.vue'
-import Register from '../views/auth/Register.vue'
-import Dashboard from '../views/pages/Dashboard.vue'
-import Profile from '../views/pages/Profile.vue'
 
-import AuthLayout from '../views/layouts/AuthLayout.vue'
-import AppLayout from '../views/layouts/AppLayout.vue'
-
-import Middlewares from '../middlewares/';
+import AdminRoutes from './admin/index.js';
+import AppRoutes from './app/index.js';
+import AuthRoutes from './auth/index.js';
 
 Vue.use(VueRouter)
 
@@ -19,53 +14,9 @@ const routes = [
     name: 'home',
     component: Home
   },
-  {
-    path: '/',
-    name: 'auth',
-    component: AuthLayout,
-    children: [
-      {
-        path: 'login',
-        name: 'login',
-        component: Login,
-        meta: {
-          middleware: [Middlewares.guest]
-        }
-      },
-      {
-        path: 'register',
-        name: 'register',
-        component: Register,
-        meta: {
-          middleware: [Middlewares.guest]
-        }
-      },
-    ]
-  },
-  {
-    path: '/',
-    name: 'app',
-    component: AppLayout,
-    children: [
-      {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: Dashboard,
-        meta: {
-          middleware: [Middlewares.auth, Middlewares.checkPermissions],
-          permissions: ['view-developer-dashboard']
-        }
-      },
-      {
-        path: '/profile',
-        name: 'profile',
-        component: Profile,
-        meta: {
-          middleware: [Middlewares.auth]
-        }
-      }
-    ]
-  },
+  AuthRoutes,
+  AppRoutes,
+  AdminRoutes
 ];
 
 const router = new VueRouter({

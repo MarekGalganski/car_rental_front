@@ -89,7 +89,7 @@
                 label="New Password Confirmation"
                 type="password"
                 :rules="[...requiredRules, ...passwordRules, newPasswordConfirmationValidator]"
-                v-model="user.newPasswordConfirmation"
+                v-model="user.newPassword_confirmation"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -114,7 +114,7 @@ export default {
       user: {
         oldPassword: '',
         newPassword: '',
-        newPasswordConfirmation: ''
+        newPassword_confirmation: ''
       }
     }
   },
