@@ -3,6 +3,7 @@ import AppLayout from '../../views/layouts/AppLayout.vue';
 import Dashboard from '../../views/pages/Dashboard.vue';
 import Profile from '../../views/pages/Profile.vue';
 import Cars from '../../views/pages/Cars.vue';
+import Car from '../../views/pages/Car.vue';
 
 export default {
   path: '/',
@@ -34,6 +35,13 @@ export default {
         middleware: [Middlewares.auth]
       }
     },
-
+    {
+      path: '/car/:id',
+      name: 'car',
+      component: Car,
+      meta: {
+        middleware: [Middlewares.auth]
+      }
+    },
   ]
 }

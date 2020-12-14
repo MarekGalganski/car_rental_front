@@ -8,9 +8,7 @@
           :key="'row' + row + column"
         >
         <cars-list-item
-          :brand="car.model"
-          :model="car.brand"
-          :price="100"
+          v-bind="car"
         >
         </cars-list-item>
         </v-col>
@@ -21,7 +19,7 @@
 </template>
 
 <script>
-import CarsListItem from '../../components/Cars/CarsListItem.vue';
+import CarsListItem from '../../components/cars/CarsListItem';
 import axios from '../../axios';
 
 export default {
@@ -45,15 +43,15 @@ export default {
   },
   created() {
     axios
-        .get('cars')
-        .then((response) => {
-          this.cars = response.data;
-          this.cars.push({brand: 'x'});
-          this.loading = false;
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+      .get('cars')
+      .then((response) => {
+        this.cars = response.data;
+        this.cars.push({brand: 'x'});
+        this.loading = false;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   },
   methods: {
     carsInRow(row) {

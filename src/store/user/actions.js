@@ -57,7 +57,7 @@ export default {
       axios
         .get('user-details')
         .then((response) => {
-          context.commit('setUserDetails', response.data.data);
+          context.commit('setUserDetails', response.data);
           resolve(response);
         })
         .catch((error) => {
