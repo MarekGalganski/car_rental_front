@@ -1,12 +1,16 @@
 <template>
   <v-container>
       <v-row>
-        <h2>Check Availability</h2>
+        <h2>
+          Check Availability
+          <span v-if="noAvailability">(NOT AVAILABLE)</span>
+          <span v-if="hasAvailability">(AVAILABLE)</span>
+        </h2>
          <v-form
           ref="availabityForm"
         >
         <v-col
-          cols="12"
+          cols="6"
           md="6"
         >
           <v-text-field
@@ -17,19 +21,19 @@
         </v-col>
 
         <v-col
-          cols="12"
+          cols="6"
           md="6"
         >
           <v-text-field
             v-model="to"
             label="to"
             required
-            @keyup.enter="checkAvailability()"
           ></v-text-field>
         </v-col>
         <v-btn
             color="primary"
             @click="checkAvailability()"
+            :disabled="loading"
           >
             Check
           </v-btn>
@@ -39,16 +43,51 @@
 </template>
 
 <script>
+import axios from '../../axios';
+
 export default {
   data() {
     return {
       from: null,
-      to: null
+      to: null,
+      loading: false,
+      status: null,
+      errors: null
     }
   },
   methods: {
     checkAvailability() {
-      alert('zd');
+      this.loading = true;
+      this.errors = null;
+
+      axios
+      .get(`cars/${this.$route.params.id}/availability?from=${this.from}&to=${this.to}`)
+      .then((response) => {
+        this.status = response.status;
+      })
+      .catch((error) => {
+        if (error.response.status === 422) {
+          this.errors = error.response.data.errors;
+        }
+        this.status = error.response.status;
+      })
+      .then(() => {
+        this.loading = false;
+      })
+    },
+    errorFor(field) {
+      return this.hasErrors && this.errors[field] ? this.errors[field] : null;
+    }
+  },
+  computed: {
+    hasErrors() {
+      return this.status === 422 && this.errors !== null;
+    },
+    hasAvailability() {
+      return this.status === 200;
+    },
+    noAvailability() {
+      return this.status === 404;
     }
   }
 }

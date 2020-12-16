@@ -10,6 +10,7 @@
         {{car.brand}}
       </div>
       <div v-else>Loading...</div>
+      <review-list></review-list>
       </v-col>
       <v-col
         cols="12"
@@ -25,11 +26,13 @@
 <script>
 import axios from '../../axios';
 import Availability from '../../components/cars/Availlability';
+import ReviewList from '../../components/cars/ReviewList';
 
 export default {
   name: 'Car',
   components: {
-    Availability
+    Availability,
+    ReviewList
   },
   data() {
     return {
