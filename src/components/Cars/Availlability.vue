@@ -46,6 +46,9 @@
 import axios from '../../axios';
 
 export default {
+  props: {
+    carId: String
+  },
   data() {
     return {
       from: null,
@@ -61,7 +64,7 @@ export default {
       this.errors = null;
 
       axios
-      .get(`cars/${this.$route.params.id}/availability?from=${this.from}&to=${this.to}`)
+      .get(`cars/${this.carId}/availability?from=${this.from}&to=${this.to}`)
       .then((response) => {
         this.status = response.status;
       })

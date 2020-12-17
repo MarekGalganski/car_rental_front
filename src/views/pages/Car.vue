@@ -10,14 +10,14 @@
         {{car.brand}}
       </div>
       <div v-else>Loading...</div>
-      <review-list></review-list>
+      <review-list :car-id="this.$route.params.id"></review-list>
       </v-col>
       <v-col
         cols="12"
         md="4"
         align="center"
       >
-        <availability></availability>
+        <availability :car-id="this.$route.params.id"></availability>
       </v-col>
     </v-row>
   </v-container>
