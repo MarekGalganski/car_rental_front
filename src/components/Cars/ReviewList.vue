@@ -13,7 +13,7 @@
           <v-col cols="12" md="6">Maras</v-col>
           <v-col cols="12" md="6">
             {{review.rating}}
-            <star-rating :rating="review.rating"></star-rating>
+            <star-rating :value="review.rating"></star-rating>
           </v-col>
         </v-row>
         <v-row>

@@ -4,6 +4,7 @@ import Dashboard from '../../views/pages/Dashboard.vue';
 import Profile from '../../views/pages/Profile.vue';
 import Cars from '../../views/pages/Cars.vue';
 import Car from '../../views/pages/Car.vue';
+import Review from '../../views/pages/review/Review.vue';
 
 export default {
   path: '/',
@@ -39,6 +40,14 @@ export default {
       path: '/car/:id',
       name: 'car',
       component: Car,
+      meta: {
+        middleware: [Middlewares.auth]
+      }
+    },
+    {
+      path: '/review/:id',
+      name: 'review',
+      component: Review,
       meta: {
         middleware: [Middlewares.auth]
       }
