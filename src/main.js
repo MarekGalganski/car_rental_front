@@ -6,6 +6,7 @@ import vuetify from './plugins/vuetify';
 import can from './helpers/can';
 import axios from './axios';
 import StarRating from './components/shared/StarRating';
+import FatalError from './components/shared/FatalError';
 import moment from 'moment';
 import '@fortawesome/fontawesome-free/css/all.css'
 
@@ -18,6 +19,7 @@ Vue.filter('fromNow', value => {
 });
 
 Vue.component('star-rating', StarRating);
+Vue.component('fatal-error', FatalError);
 
 let instance = new Vue({
   router,
