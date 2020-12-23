@@ -48,7 +48,7 @@ import { is422 } from '../../helpers/response';
 
 export default {
   props: {
-    carId: String
+    carId: [String, Number]
   },
   data() {
     return {
@@ -68,12 +68,14 @@ export default {
       .get(`cars/${this.carId}/availability?from=${this.from}&to=${this.to}`)
       .then((response) => {
         this.status = response.status;
+        this.$emit('availability', this.hasAvailability);
       })
       .catch((error) => {
         if (is422(error)) {
           this.errors = error.response.data.errors;
         }
         this.status = error.response.status;
+        this.$emit('availability', this.hasAvailability);
       })
       .then(() => {
         this.loading = false;

@@ -32,7 +32,7 @@ import axios from '../../axios';
 
 export default {
   props: {
-    carId: String
+    carId: [String, Number]
   },
   data() {
     return {

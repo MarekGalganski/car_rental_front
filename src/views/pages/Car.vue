@@ -17,7 +17,7 @@
         md="4"
         align="center"
       >
-        <availability :car-id="this.$route.params.id"></availability>
+        <availability :car-id="this.$route.params.id" @availability="checkPrice($event)"></availability>
       </v-col>
     </v-row>
   </v-container>
@@ -37,7 +37,8 @@ export default {
   data() {
     return {
       car: null,
-      loading: false
+      loading: false,
+      price: null
     }
   },
   created() {
@@ -51,6 +52,19 @@ export default {
       .catch((error) => {
         console.log(error);
       })
+  },
+  methods: {
+    checkPrice(hasAvailability) {
+      if (!hasAvailability) {
+        this.price = null;
+        return;
+      }
+
+      axios.get(`cars/${this.$route.params.id}/price?from=${this.from}&to=${this.to}`)
+        .then((response) => {
+          console.log(response);
+        })
+    }
   }
 }
 </script>
