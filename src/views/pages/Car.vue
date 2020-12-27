@@ -18,6 +18,13 @@
         align="center"
       >
         <availability :car-id="this.$route.params.id" @availability="checkPrice($event)"></availability>
+        <price-breakdown :price="price"></price-breakdown>
+          <v-btn
+            color="primary"
+            v-if="price"
+          >
+            Book now
+          </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -25,14 +32,17 @@
 
 <script>
 import axios from '../../axios';
+import { mapGetters } from "vuex";
 import Availability from '../../components/cars/Availlability';
 import ReviewList from '../../components/cars/ReviewList';
+import PriceBreakdown from '../../components/cars/PriceBreakdown';
 
 export default {
   name: 'Car',
   components: {
     Availability,
-    ReviewList
+    ReviewList,
+    PriceBreakdown
   },
   data() {
     return {
@@ -40,6 +50,12 @@ export default {
       loading: false,
       price: null
     }
+  },
+  computed: {
+    ...mapGetters({
+      from: 'booking/from',
+      to: 'booking/to',
+    })
   },
   created() {
     this.loading = true;
@@ -62,7 +78,10 @@ export default {
 
       axios.get(`cars/${this.$route.params.id}/price?from=${this.from}&to=${this.to}`)
         .then((response) => {
-          console.log(response);
+          this.price = response.data.data;
+        })
+        .catch(() => {
+          this.price = null;
         })
     }
   }

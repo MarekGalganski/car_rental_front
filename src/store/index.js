@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import user from './user/index';
 import application from './application/index';
+import booking from './booking/index';
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     user,
-    application
+    application,
+    booking
   }
 })

@@ -44,6 +44,7 @@
 
 <script>
 import axios from '../../axios';
+import { mapActions } from "vuex";
 import { is422 } from '../../helpers/response';
 
 export default {
@@ -60,6 +61,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      addFrom: 'booking/addFrom',
+      addTo: 'booking/addTo',
+    }),
     checkAvailability() {
       this.loading = true;
       this.errors = null;
@@ -68,6 +73,8 @@ export default {
       .get(`cars/${this.carId}/availability?from=${this.from}&to=${this.to}`)
       .then((response) => {
         this.status = response.status;
+        this.addFrom(this.from);
+        this.addTo(this.to);
         this.$emit('availability', this.hasAvailability);
       })
       .catch((error) => {
