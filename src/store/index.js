@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import user from './user/index';
 import application from './application/index';
 import booking from './booking/index';
+import basket from './basket/index';
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   modules: {
     user,
     application,
-    booking
+    booking,
+    basket
   }
 })

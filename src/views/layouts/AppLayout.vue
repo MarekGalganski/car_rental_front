@@ -4,6 +4,11 @@
       <v-btn small @click="logout" v-if="loggedIn">
         Logout
       </v-btn>
+      <router-link :to="{name: 'home'}">
+        <v-btn small @click="logout" v-if="loggedIn">
+          {{ itemsInBasket }}
+        </v-btn>
+      </router-link>
     </v-app-bar>
 
     <v-main>
@@ -20,6 +25,7 @@ export default {
   computed: {
     ...mapGetters({
       loggedIn: 'user/loggedIn',
+      itemsInBasket: 'basket/itemsInBasket'
     })
   },
   methods: {

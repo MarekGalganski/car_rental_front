@@ -22,6 +22,7 @@
           <v-btn
             color="primary"
             v-if="price"
+            @click="addItemToBasket()"
           >
             Book now
           </v-btn>
@@ -32,7 +33,7 @@
 
 <script>
 import axios from '../../axios';
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Availability from '../../components/cars/Availlability';
 import ReviewList from '../../components/cars/ReviewList';
 import PriceBreakdown from '../../components/cars/PriceBreakdown';
@@ -70,6 +71,9 @@ export default {
       })
   },
   methods: {
+    ...mapActions({
+      addToBasket: 'basket/addToBasket',
+    }),
     checkPrice(hasAvailability) {
       if (!hasAvailability) {
         this.price = null;
@@ -83,6 +87,14 @@ export default {
         .catch(() => {
           this.price = null;
         })
+    },
+    addItemToBasket() {
+      this.addToBasket({
+        car: this.car,
+        price: this.price,
+        from: this.from,
+        to: this.to
+      })
     }
   }
 }
