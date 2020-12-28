@@ -33,6 +33,7 @@ export default {
         this.addUserDetails().then(() => {
           console.log(this.$can('view-developer-dashboard'));
         });
+        this.loadStoredState();
       }
     });
   },
@@ -47,7 +48,8 @@ export default {
       checkUserState: 'user/setLoggedInState',
       removeNotification: 'application/removeNotification',
       addNotification: 'application/addNotification',
-      addUserDetails: 'user/setUserDetailsState'
+      addUserDetails: 'user/setUserDetailsState',
+      loadStoredState: 'basket/loadStoredState',
     }),
     updateNotification(show, index) {
       if (!show) {

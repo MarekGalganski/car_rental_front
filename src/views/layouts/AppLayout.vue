@@ -31,11 +31,12 @@ export default {
   methods: {
     ...mapActions({
       logoutUser: 'user/logoutUser',
-      addNotification: 'application/addNotification'
+      addNotification: 'application/addNotification',
     }),
     logout() {
       this.logoutUser()
         .then(() => {
+          this.loadStoredState();
           this.addNotification({
             show: true,
             text: 'Logged out!'
@@ -44,6 +45,6 @@ export default {
           })
         });
     }
-  }
+  },
 };
 </script>

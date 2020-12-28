@@ -4,5 +4,8 @@ export default {
   },
   removeFromBasket(state, payload) {
     state.items = state.items.filter(item => item.car.id !== payload);
+  },
+  setBasket(state, payload) {
+    state.items = payload;
   }
 }

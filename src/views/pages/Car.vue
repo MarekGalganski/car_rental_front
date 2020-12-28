@@ -23,8 +23,16 @@
             color="primary"
             v-if="price"
             @click="addItemToBasket()"
+            :disabled="inBasketAlready"
           >
             Book now
+          </v-btn>
+          <v-btn
+            color="primary"
+            v-if="inBasketAlready"
+            @click="removeItemFromBasket()"
+          >
+            Remove from basket
           </v-btn>
       </v-col>
     </v-row>
@@ -56,7 +64,14 @@ export default {
     ...mapGetters({
       from: 'booking/from',
       to: 'booking/to',
-    })
+    }),
+    inBasketAlready() {
+      if (this.car === null) {
+        return false;
+      }
+
+      return this.$store.getters['basket/inBasketAlready'](this.car.id);
+    }
   },
   created() {
     this.loading = true;
@@ -73,6 +88,7 @@ export default {
   methods: {
     ...mapActions({
       addToBasket: 'basket/addToBasket',
+      removeFromBasket: 'basket/removeFromBasket'
     }),
     checkPrice(hasAvailability) {
       if (!hasAvailability) {
@@ -95,6 +111,9 @@ export default {
         from: this.from,
         to: this.to
       })
+    },
+    removeItemFromBasket() {
+      this.removeFromBasket(this.car.id);
     }
   }
 }
