@@ -4,8 +4,8 @@
       <v-btn small @click="logout" v-if="loggedIn">
         Logout
       </v-btn>
-      <router-link :to="{name: 'home'}">
-        <v-btn small @click="logout" v-if="loggedIn">
+      <router-link :to="{name: 'basket'}">
+        <v-btn small v-if="loggedIn">
           {{ itemsInBasket }}
         </v-btn>
       </router-link>

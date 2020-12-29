@@ -9,5 +9,8 @@ export default {
         false
       );
     }
+  },
+  basket(state) {
+    return state.items;
   }
 }

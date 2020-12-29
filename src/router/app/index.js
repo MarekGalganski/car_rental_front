@@ -5,6 +5,7 @@ import Profile from '../../views/pages/Profile.vue';
 import Cars from '../../views/pages/Cars.vue';
 import Car from '../../views/pages/Car.vue';
 import Review from '../../views/pages/review/Review.vue';
+import Basket from '../../views/pages/Basket.vue';
 
 export default {
   path: '/',
@@ -48,6 +49,14 @@ export default {
       path: '/review/:id',
       name: 'review',
       component: Review,
+      meta: {
+        middleware: [Middlewares.auth]
+      }
+    },
+    {
+      path: '/basket',
+      name: 'basket',
+      component: Basket,
       meta: {
         middleware: [Middlewares.auth]
       }
