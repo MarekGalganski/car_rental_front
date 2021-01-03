@@ -36,7 +36,6 @@ export default {
     logout() {
       this.logoutUser()
         .then(() => {
-          this.loadStoredState();
           this.addNotification({
             show: true,
             text: 'Logged out!'
