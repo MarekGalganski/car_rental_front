@@ -1,7 +1,7 @@
 <template>
   <v-main>
   <v-app-bar app dark color="primary">
-    <v-app-bar-title class="text-uppercase font-weight-medium headline" >
+    <v-app-bar-title class="text-uppercase font-weight-medium headline">
       Car rental
     </v-app-bar-title>
     <v-icon large class="ml-3">fas fa-car</v-icon>
@@ -34,6 +34,6 @@
 
 <script>
 export default {
-  
+
 }
 </script>
