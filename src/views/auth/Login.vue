@@ -3,7 +3,12 @@
     <v-row justify="center">
       <v-col sm="8" md="5">
         <v-card class="mt-6">
-          <v-card-title class="justify-center headline text-uppercase">Login</v-card-title>
+          <v-card-title
+            class="primary justify-center headline text-uppercase font-weight-medium"
+            style="color: white"
+          >
+            Login
+          </v-card-title>
           <v-card-text>
             <v-form ref="loginForm">
               <v-text-field
@@ -18,10 +23,12 @@
               <v-text-field
                 label="Password"
                 name="password"
-                type="password"
+                :type="showPassword ? 'text' : 'password'"
                 :rules="requiredRules"
                 v-model="user.password"
                 prepend-icon="fas fa-lock"
+                :append-icon="showPassword ? 'far fa-eye' : 'far fa-eye-slash'"
+                @click:append="showPassword = !showPassword"
               ></v-text-field>
 
               <v-card-actions>
@@ -57,7 +64,8 @@ export default {
       user: {
         email: '',
         password: ''
-      }
+      },
+      showPassword: false
     }
   },
   methods: {

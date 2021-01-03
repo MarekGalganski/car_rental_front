@@ -1,63 +1,67 @@
 <template>
   <v-container>
-    <v-row
-      justify="center"
-    >
-      <v-col
-        md="6"
-      >
-      <v-banner
-        elevation="7"
-        single-line
-        sticky
-        align="center"
-      >
-        REGISTER
-      </v-banner>
-      <v-spacer></v-spacer>
-        <v-form
-          ref="registerForm"
-          :value="formValid"
-        >
-          <v-text-field
-            label="Email"
-            name="email"
-            type="text"
-            :rules="emailRules"
-            v-model="newUser.email"
-          ></v-text-field>
-
-          <v-text-field
-            label="Name"
-            name="name"
-            type="text"
-            :rules="requiredRules"
-            v-model="newUser.name"
-          ></v-text-field>
-
-          <v-text-field
-            label="Password"
-            name="password"
-            type="password"
-            :rules="[...requiredRules, ...passwordRules]"
-            v-model="newUser.password"
-          ></v-text-field>
-
-          <v-text-field
-            label="Confirm Password"
-            name="password_confirmation"
-            type="password"
-            :rules="[...requiredRules, ...passwordRules]"
-            v-model="newUser.password_confirmation"
-          ></v-text-field>
-
-          <v-btn
-            color="primary"
-            @click="registerUser()"
+    <v-row justify="center">
+      <v-col sm="8" md="5">
+        <v-card class="mt-6">
+          <v-card-title
+            class="primary justify-center headline text-uppercase font-weight-medium"
+            style="color: white"
           >
             Register
-          </v-btn>
-        </v-form>
+          </v-card-title>
+          <v-card-text>
+            <v-form
+              ref="registerForm"
+              :value="formValid"
+            >
+              <v-text-field
+                label="Email"
+                name="email"
+                type="text"
+                :rules="emailRules"
+                v-model="newUser.email"
+                prepend-icon="fas fa-envelope-square"
+              ></v-text-field>
+
+              <v-text-field
+                label="Name"
+                name="name"
+                type="text"
+                :rules="requiredRules"
+                v-model="newUser.name"
+                prepend-icon="far fa-user"
+              ></v-text-field>
+
+              <v-text-field
+                label="Password"
+                name="password"
+                type="password"
+                :rules="[...requiredRules, ...passwordRules]"
+                v-model="newUser.password"
+                prepend-icon="fas fa-lock"
+              ></v-text-field>
+
+              <v-text-field
+                label="Confirm Password"
+                name="password_confirmation"
+                type="password"
+                :rules="[...requiredRules, ...passwordRules]"
+                v-model="newUser.password_confirmation"
+                prepend-icon="fas fa-check"
+              ></v-text-field>
+
+              <v-card-actions>
+                <v-btn
+                  block
+                  color="primary"
+                  @click="registerUser()"
+                >
+                  Register
+                </v-btn>
+              </v-card-actions>
+            </v-form>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
