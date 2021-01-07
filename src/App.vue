@@ -32,7 +32,7 @@ export default {
       if (this.loggedIn) {
         this.addUserDetails().then(() => {
           console.log(this.$can('view-developer-dashboard'));
-          this.loadStoredState()
+          this.loadStoredState();
         });
       }
     });

@@ -32,7 +32,6 @@
     </v-main>
     <v-footer
       padless
-      fixed
       dark
       color="primary"
     >
