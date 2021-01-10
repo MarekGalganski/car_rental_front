@@ -1,44 +1,49 @@
 <template>
   <v-container>
-      <v-row>
-        <h2>
+      <div>
+        <p class="headline text-uppercase">
           Check Availability
-          <span v-if="noAvailability">(NOT AVAILABLE)</span>
-          <span v-if="hasAvailability">(AVAILABLE)</span>
-        </h2>
+          <span v-if="noAvailability" class="red--text">(NOT AVAILABLE)</span>
+          <span v-if="hasAvailability" class="green--text">(AVAILABLE)</span>
+        </p>
          <v-form
           ref="availabityForm"
         >
-        <v-col
-          cols="6"
-          md="6"
-        >
-          <v-text-field
-          v-model="from"
-          label="from"
-            required
-          ></v-text-field>
-        </v-col>
+        <v-row>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-text-field
+              v-model="from"
+              label="Start Date"
+              :rules="fromRules"
+              type="date"
+            ></v-text-field>
+          </v-col>
 
-        <v-col
-          cols="6"
-          md="6"
-        >
-          <v-text-field
-            v-model="to"
-            label="to"
-            required
-          ></v-text-field>
-        </v-col>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-text-field
+              v-model="to"
+              label="End Date"
+              :rules="toRules"
+              type="date"
+            ></v-text-field>
+          </v-col>
+        </v-row>
         <v-btn
             color="primary"
             @click="checkAvailability()"
             :disabled="loading"
+            block
           >
             Check
           </v-btn>
         </v-form>
-      </v-row>
+      </div>
   </v-container>
 </template>
 
@@ -46,11 +51,15 @@
 import axios from '../../axios';
 import { mapActions } from "vuex";
 import { is422 } from '../../helpers/response';
+import DateValidationMixin from '../../mixins/validations/dateValidation.js';
 
 export default {
   props: {
     carId: [String, Number]
   },
+  mixins: [
+    DateValidationMixin
+  ],
   data() {
     return {
       from: null,
@@ -66,27 +75,29 @@ export default {
       addTo: 'booking/addTo',
     }),
     checkAvailability() {
-      this.loading = true;
-      this.errors = null;
+      if (this.$refs.availabityForm.validate()) {
+        this.loading = true;
+        this.errors = null;
 
-      axios
-      .get(`cars/${this.carId}/availability?from=${this.from}&to=${this.to}`)
-      .then((response) => {
-        this.status = response.status;
-        this.addFrom(this.from);
-        this.addTo(this.to);
-        this.$emit('availability', this.hasAvailability);
-      })
-      .catch((error) => {
-        if (is422(error)) {
-          this.errors = error.response.data.errors;
-        }
-        this.status = error.response.status;
-        this.$emit('availability', this.hasAvailability);
-      })
-      .then(() => {
-        this.loading = false;
-      })
+        axios
+        .get(`cars/${this.carId}/availability?from=${this.from}&to=${this.to}`)
+        .then((response) => {
+          this.status = response.status;
+          this.addFrom(this.from);
+          this.addTo(this.to);
+          this.$emit('availability', this.hasAvailability);
+        })
+        .catch((error) => {
+          if (is422(error)) {
+            this.errors = error.response.data.errors;
+          }
+          this.status = error.response.status;
+          this.$emit('availability', this.hasAvailability);
+        })
+        .then(() => {
+          this.loading = false;
+        })
+      }
     },
     errorFor(field) {
       return this.hasErrors && this.errors[field] ? this.errors[field] : null;

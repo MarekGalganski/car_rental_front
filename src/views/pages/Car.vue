@@ -6,10 +6,30 @@
         md="8"
         align="center"
       >
-      <div v-if="!loading">
-        {{car.brand}}
-      </div>
-      <div v-else>Loading...</div>
+      <v-card
+        class="mx-auto"
+        outlined
+      >
+        <v-card-text>
+          <div>
+              {{ car.brand }}
+          </div>
+          <p class="headline text--primary">
+              {{ car.model }}
+          </p>
+          <hr />
+          <br />
+          <div class="text--primary">
+            {{ car.description }}
+          </div>
+          <br />
+          <hr />
+          <br />
+          <p class="headline text--primary">
+             € {{ car.price }}
+          </p>
+        </v-card-text>
+      </v-card>
       <review-list :car-id="this.$route.params.id"></review-list>
       </v-col>
       <v-col
@@ -17,23 +37,7 @@
         md="4"
         align="center"
       >
-        <availability :car-id="this.$route.params.id" @availability="checkPrice($event)"></availability>
-        <price-breakdown :price="price"></price-breakdown>
-          <v-btn
-            color="primary"
-            v-if="price"
-            @click="addItemToBasket()"
-            :disabled="inBasketAlready"
-          >
-            Book now
-          </v-btn>
-          <v-btn
-            color="primary"
-            v-if="inBasketAlready"
-            @click="removeItemFromBasket()"
-          >
-            Remove from basket
-          </v-btn>
+       <availability :car-id="this.$route.params.id"></availability>
       </v-col>
     </v-row>
   </v-container>
@@ -44,14 +48,14 @@ import axios from '../../axios';
 import { mapGetters, mapActions } from "vuex";
 import Availability from '../../components/cars/Availlability';
 import ReviewList from '../../components/cars/ReviewList';
-import PriceBreakdown from '../../components/cars/PriceBreakdown';
+// import PriceBreakdown from '../../components/cars/PriceBreakdown';
 
 export default {
   name: 'Car',
   components: {
     Availability,
     ReviewList,
-    PriceBreakdown
+    // PriceBreakdown
   },
   data() {
     return {

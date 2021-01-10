@@ -1,14 +1,24 @@
 <template>
   <v-main>
-  <v-app-bar app dark color="primary">
-    <v-app-bar-title class="text-uppercase font-weight-medium headline">
-      Car rental
-    </v-app-bar-title>
-    <v-icon large class="ml-3">fas fa-car</v-icon>
-    <v-spacer></v-spacer>
-    <v-btn text rounded to="/register">Register</v-btn>
-    <v-btn text rounded to="/login">Login</v-btn>
-  </v-app-bar>
+  <v-app-bar app>
+
+      <v-toolbar-title>
+        <v-btn to="login" color="primary">
+          <v-icon left>mdi-car-multiple</v-icon>
+          Car Rental
+        </v-btn>
+      </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn to="register" color="primary" icon>
+        <v-icon>fas fa-user-circle</v-icon>
+      </v-btn>
+
+      <v-btn to="login" color="primary" icon>
+        <v-icon>fas fa-sign-in-alt</v-icon>
+      </v-btn>
+    </v-app-bar>
   <router-view></router-view>
   <v-footer
     padless

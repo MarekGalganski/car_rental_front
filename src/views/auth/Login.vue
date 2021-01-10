@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="mb-15 mt-5">
     <v-row justify="center">
       <v-col sm="8" md="5">
         <v-card class="mt-6">
