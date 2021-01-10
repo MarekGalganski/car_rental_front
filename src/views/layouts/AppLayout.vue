@@ -34,6 +34,7 @@
       padless
       dark
       color="primary"
+      fixed
     >
     <v-row
         justify="center"

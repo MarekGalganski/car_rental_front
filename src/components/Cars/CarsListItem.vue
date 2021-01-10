@@ -1,14 +1,23 @@
 <template>
   <v-container>
     <v-card
-    elevation="2"
+      class="mx-auto"
+      max-width="344"
+      height="200%"
+      outlined
     >
-    <router-link :to="{ name: 'car', params: { id: id } }">
-      <v-card-title>{{ brand }}</v-card-title>
-    </router-link>
-    <v-card-title>{{ brand }}</v-card-title>
-    <v-card-text>
-      <div>{{ model }}</div>
+      <v-card-text>
+      <div>
+        <router-link :to="{ name: 'car', params: { id: id } }">
+          {{ model }}
+        </router-link>
+      </div>
+      <p class="display-1 text--primary">
+          {{ brand }}
+      </p>
+      <div class="text--primary">
+        {{ description }}
+      </div>
     </v-card-text>
     </v-card>
   </v-container>
@@ -19,7 +28,8 @@ export default {
   props: {
     model: String,
     brand: String,
-    id: Number
+    id: Number,
+    description: String
   }
 }
 </script>
