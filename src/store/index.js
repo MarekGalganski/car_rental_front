@@ -6,6 +6,7 @@ import application from './application/index';
 import booking from './booking/index';
 import basket from './basket/index';
 import car from './car/index';
+import review from './review/index';
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     application,
     booking,
     basket,
-    car
+    car,
+    review
   }
 })

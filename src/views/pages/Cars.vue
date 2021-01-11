@@ -5,15 +5,15 @@
     </div>
     <div v-else>
     <v-row>
-        <v-col
-          v-for="(car, index) in cars"
-          :key="index"
-          cols="12"
-          md="4"
-        >
-          <cars-list-item v-bind="car"></cars-list-item>
-        </v-col>
-      </v-row>
+      <v-col
+        v-for="(car, index) in cars"
+        :key="index"
+        cols="12"
+        md="4"
+      >
+        <cars-list-item v-bind="car"></cars-list-item>
+      </v-col>
+    </v-row>
       <div class="text-center">
         <paginate
           store="car"

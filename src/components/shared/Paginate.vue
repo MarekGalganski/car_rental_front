@@ -35,7 +35,12 @@ export default {
   },
   methods: {
     paginatePage(pageNumber) {
-      this.$store.dispatch(this.store + '/getList', pageNumber)
+      if (this.store == 'review') {
+        let payload = {'carId': this.$store.state.review.carId, 'pageNumber': pageNumber};
+        this.$store.dispatch(this.store + '/getList', payload)
+      } else {
+        this.$store.dispatch(this.store + '/getList', pageNumber)
+      }
     }
   }
 }

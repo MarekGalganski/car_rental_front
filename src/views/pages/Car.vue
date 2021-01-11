@@ -6,31 +6,38 @@
         md="8"
         align="center"
       >
-      <v-card
-        class="mx-auto"
-        outlined
-      >
-        <v-card-text>
-          <div>
-              {{ car.brand }}
-          </div>
-          <p class="headline text--primary">
-              {{ car.model }}
-          </p>
-          <hr />
-          <br />
-          <div class="text--primary">
-            {{ car.description }}
-          </div>
-          <br />
-          <hr />
-          <br />
-          <p class="headline text--primary">
-             € {{ car.price }}
-          </p>
-        </v-card-text>
-      </v-card>
-      <review-list :car-id="this.$route.params.id"></review-list>
+      <v-hover>
+        <template v-slot:default="{ hover }">
+          <v-card
+            class="mx-auto"
+            outlined
+            :elevation="hover ? 20 : 6"
+          >
+            <v-card-text>
+              <div>
+                  {{ car.brand }}
+              </div>
+              <p class="headline text--primary">
+                  {{ car.model }}
+              </p>
+              <hr />
+              <br />
+              <div class="text--primary">
+                {{ car.description }}
+              </div>
+              <br />
+              <hr />
+              <br />
+              <p class="headline text--primary">
+                € {{ car.price }}
+              </p>
+            </v-card-text>
+          </v-card>
+        </template>
+      </v-hover>
+      <div class="my-8" >
+        <review-list :car-id="this.$route.params.id"></review-list>
+      </div>
       </v-col>
       <v-col
         cols="12"
