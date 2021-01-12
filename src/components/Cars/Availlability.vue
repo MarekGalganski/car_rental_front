@@ -40,7 +40,16 @@
             :disabled="loading"
             block
           >
-            Check
+            <span v-if="!loading">Check</span>
+            <span v-else>
+              <v-progress-circular
+                :size="20"
+                :width="2"
+                indeterminate
+                color="primary"
+              ></v-progress-circular>
+              Checking...
+            </span>
           </v-btn>
         </v-form>
       </div>

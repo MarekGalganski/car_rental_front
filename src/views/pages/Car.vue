@@ -1,52 +1,75 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col
-        cols="12"
-        md="8"
-        align="center"
-      >
-      <v-hover>
-        <template v-slot:default="{ hover }">
-          <v-card
-            class="mx-auto"
-            outlined
-            :elevation="hover ? 20 : 6"
+    <div v-if="loading">
+      <loading></loading>
+    </div>
+    <div v-else>
+      <v-row>
+        <v-col
+          cols="12"
+          md="8"
+          align="center"
+        >
+        <v-hover>
+          <template v-slot:default="{ hover }">
+            <v-card
+              class="mx-auto"
+              outlined
+              :elevation="hover ? 20 : 6"
+            >
+              <v-card-text>
+                <div>
+                    {{ car.brand }}
+                </div>
+                <p class="headline text--primary">
+                    {{ car.model }}
+                </p>
+                <hr />
+                <br />
+                <div class="text--primary">
+                  {{ car.description }}
+                </div>
+                <br />
+                <hr />
+                <br />
+                <p class="headline text--primary">
+                  € {{ car.price }}
+                </p>
+              </v-card-text>
+            </v-card>
+          </template>
+        </v-hover>
+        <div class="my-8" >
+          <review-list :car-id="this.$route.params.id"></review-list>
+        </div>
+        </v-col>
+        <v-col
+          cols="12"
+          md="4"
+          align="center"
+          justify="center"
+          class="mb-12"
+        >
+          <availability
+            :car-id="this.$route.params.id"
+            @availability="checkPrice($event)"
+          ></availability>
+          <div
+            class="px-3 py-3"
+            v-if="price"
           >
-            <v-card-text>
-              <div>
-                  {{ car.brand }}
-              </div>
-              <p class="headline text--primary">
-                  {{ car.model }}
-              </p>
-              <hr />
-              <br />
-              <div class="text--primary">
-                {{ car.description }}
-              </div>
-              <br />
-              <hr />
-              <br />
-              <p class="headline text--primary">
-                € {{ car.price }}
-              </p>
-            </v-card-text>
-          </v-card>
-        </template>
-      </v-hover>
-      <div class="my-8" >
-        <review-list :car-id="this.$route.params.id"></review-list>
-      </div>
-      </v-col>
-      <v-col
-        cols="12"
-        md="4"
-        align="center"
-      >
-       <availability :car-id="this.$route.params.id"></availability>
-      </v-col>
-    </v-row>
+            <price-breakdown :price="price"></price-breakdown>
+            <v-btn
+              block
+              outlined
+              color="primary"
+            >
+              Book now
+            </v-btn>
+          </div>
+        </v-col>
+      </v-row>
+    </div>
   </v-container>
 </template>
 
@@ -55,14 +78,16 @@ import axios from '../../axios';
 import { mapGetters, mapActions } from "vuex";
 import Availability from '../../components/cars/Availlability';
 import ReviewList from '../../components/cars/ReviewList';
-// import PriceBreakdown from '../../components/cars/PriceBreakdown';
+import PriceBreakdown from '../../components/cars/PriceBreakdown';
+import Loading from '../../components/shared/Loading';
 
 export default {
   name: 'Car',
   components: {
     Availability,
     ReviewList,
-    // PriceBreakdown
+    Loading,
+    PriceBreakdown
   },
   data() {
     return {

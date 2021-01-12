@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <div v-if="loading">Loading...</div>
+    <div v-if="loading">
+      <loading></loading>
+    </div>
     <div v-else>
       <p class="headline text-secondary text-uppercase">Reviews</p>
       <div
@@ -9,8 +11,8 @@
         :key="index"
       >
         <v-row align="center" justify="center">
-          <v-col cols="12" md="6">{{ review.name }}</v-col>
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="6" align="center" justify="center">{{ review.name }}</v-col>
+          <v-col cols="12" md="6" align="center" justify="center">
             <star-rating :value="review.rating"></star-rating>
           </v-col>
         </v-row>
@@ -30,7 +32,7 @@
         <paginate
           store="review"
           collection="reviews"
-          class="my-12"
+          class="mb-3 mt-5"
         >
         </paginate>
       </div>
@@ -40,6 +42,7 @@
 
 <script>
 import Paginate from '../shared/Paginate';
+import Loading from '../shared/Loading';
 
 export default {
   props: {
@@ -47,6 +50,7 @@ export default {
   },
   components: {
     Paginate,
+    Loading
   },
   data() {
     return {
