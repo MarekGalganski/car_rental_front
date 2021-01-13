@@ -63,9 +63,30 @@
               block
               outlined
               color="primary"
+              @click="addItemToBasket()"
+              :disabled="inBasketAlready"
             >
               Book now
             </v-btn>
+          </div>
+          <div
+            v-if="inBasketAlready"
+            class="px-3 py-3"
+          >
+            <v-btn
+              block
+              outlined
+              color="primary"
+              @click="removeItemFromBasket()"
+            >
+              Remove from basket
+            </v-btn>
+            <span class="caption float-left">
+              You've added this car to basket already.
+            </span>
+            <span class="caption float-left">
+              If you want to change dates, remove from basket first.
+            </span>
           </div>
         </v-col>
       </v-row>
@@ -76,6 +97,7 @@
 <script>
 import axios from '../../axios';
 import { mapGetters, mapActions } from "vuex";
+
 import Availability from '../../components/cars/Availlability';
 import ReviewList from '../../components/cars/ReviewList';
 import PriceBreakdown from '../../components/cars/PriceBreakdown';

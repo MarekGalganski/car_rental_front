@@ -10,18 +10,59 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            :to="{ name: 'profile'}"
+            color="primary"
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-badge
+              :content="itemsInBasket"
+              :value="itemsInBasket"
+              color="primary"
+              overlap
+            >
+              <v-icon>
+                mdi-cart-outline
+              </v-icon>
+            </v-badge>
+          </v-btn>
+        </template>
+        <span>Basket</span>
+      </v-tooltip>
 
-      <v-btn to="profile" color="primary" icon>
-        <v-icon>mdi-view-list</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            :to="{ name: 'profile'}"
+            color="primary"
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-account-outline</v-icon>
+          </v-btn>
+        </template>
+        <span>User</span>
+      </v-tooltip>
 
-      <v-btn :to="{ name: 'profile'}" color="primary" icon>
-        <v-icon>mdi-account-edit</v-icon>
-      </v-btn>
-
-      <v-btn @click="logout" color="primary" icon>
-        <v-icon>mdi-logout-variant</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            @click="logout"
+            color="primary"
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-logout-variant</v-icon>
+          </v-btn>
+        </template>
+        <span>Logout</span>
+      </v-tooltip>
     </v-app-bar>
     <v-main class="pt-4">
       <router-view></router-view>
