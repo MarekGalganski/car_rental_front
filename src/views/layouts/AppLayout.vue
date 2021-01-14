@@ -13,7 +13,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            :to="{ name: 'profile'}"
+            :to="{ name: 'basket'}"
             color="primary"
             icon
             v-bind="attrs"

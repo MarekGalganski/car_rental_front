@@ -11,9 +11,15 @@
         :key="index"
       >
         <v-row align="center" justify="center">
-          <v-col cols="12" md="6" align="center" justify="center">{{ review.name }}</v-col>
           <v-col cols="12" md="6" align="center" justify="center">
-            <star-rating :value="review.rating"></star-rating>
+            <span class="title">
+              {{ review.name }}
+            </span>
+          </v-col>
+          <v-col cols="12" md="6" align="center" justify="center" style="pointer-events: none">
+            <div class="float-right">
+              <star-rating :value="review.rating"></star-rating>
+            </div>
           </v-col>
         </v-row>
         <v-row>
@@ -32,7 +38,7 @@
         <paginate
           store="review"
           collection="reviews"
-          class="mb-3 mt-5"
+          class="mb-1 mt-5"
         >
         </paginate>
       </div>
@@ -45,9 +51,6 @@ import Paginate from '../shared/Paginate';
 import Loading from '../shared/Loading';
 
 export default {
-  props: {
-    carId: [String, Number]
-  },
   components: {
     Paginate,
     Loading
@@ -58,9 +61,9 @@ export default {
       error: false
     }
   },
-  created() {
+  beforeCreate() {
     this.loading = true;
-    let payload = {'carId': this.$props.carId, 'pageNumber': 0};
+    let payload = {'carId': this.$route.params.id, 'pageNumber': 0};
     this.$store.dispatch('review/getList', payload)
       .then(() => {
         this.loading = false;

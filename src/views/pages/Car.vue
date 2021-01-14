@@ -18,8 +18,10 @@
               :elevation="hover ? 20 : 6"
             >
               <v-card-text>
-                <div>
+                <div class="my-1">
+                  <span class="blue--text overline">
                     {{ car.brand }}
+                  </span>
                 </div>
                 <p class="headline text--primary">
                     {{ car.model }}
@@ -40,7 +42,7 @@
           </template>
         </v-hover>
         <div class="my-8" >
-          <review-list :car-id="this.$route.params.id"></review-list>
+          <review-list></review-list>
         </div>
         </v-col>
         <v-col

@@ -6,39 +6,26 @@
       outlined
       height="250"
     >
-    <v-card-title class="cyan darken-1">
-          <span class="headline white--text">Sarah Mcbeal</span>
+    <v-card-title class="primary lighten-1">
+          <span class="title white--text">{{ model }}</span>
 
           <v-spacer></v-spacer>
 
           <v-btn
-            dark
-            icon
+            outlined
+            color="white"
+            :to="{ name: 'car', params: { id: id } }"
           >
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
-
-          <v-btn
-            dark
-            icon
-          >
-            <v-icon>mdi-pencil</v-icon>
-          </v-btn>
-
-          <v-btn
-            dark
-            icon
-          >
-            <v-icon>mdi-dots-vertical</v-icon>
+            Details
           </v-btn>
         </v-card-title>
       <v-card-text>
-        <div>
-          <router-link :to="{ name: 'car', params: { id: id } }">
+        <div class="my-1">
+          <span class="blue--text overline">
             {{ brand }}
-          </router-link>
+          </span>
         </div>
-        <div class="text--primary" height="50">
+        <div class="text--primary">
           {{ description }}
         </div>
       </v-card-text>

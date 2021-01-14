@@ -18,7 +18,7 @@
         <paginate
           store="car"
           collection="cars"
-          class="my-12"
+          class="mb-12"
         >
         </paginate>
       </div>
@@ -44,7 +44,7 @@ export default {
       error: false
     }
   },
-  created() {
+  beforeCreate() {
     this.loading = true;
 
     this.$store.dispatch('car/getList', 0)

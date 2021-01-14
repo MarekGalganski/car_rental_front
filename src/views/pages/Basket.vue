@@ -2,11 +2,13 @@
   <v-container>
     <v-row>
       <v-col
+        cols="12"
         md="8"
       >
         Checkout form
       </v-col>
       <v-col
+        cols="12"
         md="4"
       >
         <div v-for="item in basket" :key="item.car.id">
