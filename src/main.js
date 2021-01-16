@@ -18,6 +18,10 @@ Vue.filter('fromNow', value => {
   return moment(value).fromNow();
 });
 
+Vue.filter('dd.mm.yy', value => {
+  return moment(value).format('MM.DD.YYYY');
+});
+
 Vue.component('star-rating', StarRating);
 Vue.component('fatal-error', FatalError);
 
