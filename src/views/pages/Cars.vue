@@ -64,19 +64,4 @@ export default {
     }
   },
 }
-// <div v-if="loading">Data is loading...</div>
-//     <div v-else>
-//       <v-row v-for="row in rows" :key="'row' + row">
-//         <v-col
-//           v-for="(car, column) in carsInRow(row)"
-//           :key="'row' + row + column"
-//         >
-//         <cars-list-item
-//           v-bind="car"
-//         >
-//         </cars-list-item>
-//         </v-col>
-//         <v-col v-for="place in placeholdersInRow(row)" :key="'placholder' + row + place"></v-col>
-//       </v-row>
-//     </div>
 </script>

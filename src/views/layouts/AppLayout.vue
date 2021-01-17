@@ -94,16 +94,41 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'AppLayout',
+  created() {
+    this.checkUserState().then(() => {
+      if (this.loggedIn) {
+        this.addUserDetails()
+        .then(() => {
+          this.loadStoredState();
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            localStorage.setItem('token', '');
+            localStorage.setItem('basket', '');
+            this.addNotification({
+              show: true,
+              text: 'Please Log In!'
+            }).then(() => {
+              this.$router.push('login');
+            })
+          }
+        });
+      }
+    });
+  },
   computed: {
     ...mapGetters({
       loggedIn: 'user/loggedIn',
-      itemsInBasket: 'basket/itemsInBasket'
+      itemsInBasket: 'basket/itemsInBasket',
     })
   },
   methods: {
     ...mapActions({
       logoutUser: 'user/logoutUser',
       addNotification: 'application/addNotification',
+      checkUserState: 'user/setLoggedInState',
+      addUserDetails: 'user/setUserDetailsState',
+      loadStoredState: 'basket/loadStoredState',
     }),
     logout() {
       this.logoutUser()
@@ -118,31 +143,4 @@ export default {
     }
   },
 };
-// <v-app-bar app dark color="primary">
-//       <router-link :to="{ name: 'cars'}">
-//         <v-app-bar-title class="text-uppercase font-weight-medium headline white--text">
-//           <v-icon x-large>fas fa-car-side</v-icon>
-//         </v-app-bar-title>
-//       </router-link>
-//       <v-spacer></v-spacer>
-//       <v-btn
-//         color="primary"
-//         dark
-//         rounded
-//         to="profile"
-//         v-if="loggedIn"
-//         class="mx-1"
-//       >
-//         <v-icon>fas fa-user-cog</v-icon>
-//       </v-btn>
-//       <v-btn
-//         color="primary"
-//         dark
-//         rounded
-//         @click="logout"
-//         v-if="loggedIn"
-//       >
-//         <v-icon>fas fa-sign-out-alt</v-icon>
-//       </v-btn>
-//   </v-app-bar>
 </script>

@@ -19,7 +19,11 @@ Vue.filter('fromNow', value => {
 });
 
 Vue.filter('dd.mm.yy', value => {
-  return moment(value).format('MM.DD.YYYY');
+  return moment(value).format('DD.MM.YYYY');
+});
+
+Vue.filter('dd.mm.yy HH:mm', value => {
+  return moment(value).format('DD.MM.YYYY HH:mm');
 });
 
 Vue.component('star-rating', StarRating);

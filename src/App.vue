@@ -30,9 +30,21 @@ export default {
   created() {
     this.checkUserState().then(() => {
       if (this.loggedIn) {
-        this.addUserDetails().then(() => {
-          console.log(this.$can('view-developer-dashboard'));
+        this.addUserDetails()
+        .then(() => {
           this.loadStoredState();
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            localStorage.setItem('token', '');
+            localStorage.setItem('basket', '');
+            this.addNotification({
+              show: true,
+              text: 'Please Log In!'
+            }).then(() => {
+              this.$router.push('login');
+            })
+          }
         });
       }
     });
@@ -56,6 +68,13 @@ export default {
         this.removeNotification(index)
       }
     }
+  },
+   mounted(){
+
+    // window.onbeforeunload = function () {
+    //     var storage = window.localStorage;
+    //     storage.clear()
+    // }
   }
 };
 </script>

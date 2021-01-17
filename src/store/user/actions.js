@@ -39,6 +39,7 @@ export default {
     return new Promise((resolve) => {
       localStorage.removeItem('token');
       context.commit('setLoggedIn', false);
+      context.commit('setUserDetails', '');
       resolve(true);
     })
   },

@@ -3,21 +3,44 @@
   <v-app-bar app>
 
       <v-toolbar-title>
+        <div style="pointer-events: none">
         <v-btn to="login" color="primary">
           <v-icon left>mdi-car-multiple</v-icon>
           Car Rental
         </v-btn>
+        </div>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            to="register"
+            color="primary"
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>fas fa-user-circle</v-icon>
+          </v-btn>
+        </template>
+        <span>Register</span>
+      </v-tooltip>
 
-      <v-btn to="register" color="primary" icon>
-        <v-icon>fas fa-user-circle</v-icon>
-      </v-btn>
-
-      <v-btn to="login" color="primary" icon>
-        <v-icon>fas fa-sign-in-alt</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            to="login"
+            color="primary"
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>fas fa-sign-in-alt</v-icon>
+          </v-btn>
+        </template>
+        <span>Log In</span>
+      </v-tooltip>
     </v-app-bar>
   <router-view></router-view>
   <v-footer

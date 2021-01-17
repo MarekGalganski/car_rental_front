@@ -57,6 +57,7 @@
     <v-row
       align="center"
       justify="center"
+      class="mb-12"
     >
       <v-col
         cols="12"
@@ -166,7 +167,7 @@ export default {
         });
     },
     newPasswordConfirmationValidator() {
-      return (this.user.newPasswordConfirmation === this.user.newPassword) || 'New password is not confirmed';
+      return (this.user.newPassword_confirmation == this.user.newPassword) || 'New password is not confirmed';
     }
   }
 }
