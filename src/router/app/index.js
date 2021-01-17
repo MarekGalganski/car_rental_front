@@ -6,6 +6,7 @@ import Cars from '../../views/pages/Cars.vue';
 import Car from '../../views/pages/Car.vue';
 import Review from '../../views/pages/review/Review.vue';
 import Basket from '../../views/pages/Basket.vue';
+import BookingsList from '../../views/pages/BookingsList.vue';
 
 export default {
   path: '/',
@@ -57,6 +58,14 @@ export default {
       path: '/basket',
       name: 'basket',
       component: Basket,
+      meta: {
+        middleware: [Middlewares.auth]
+      }
+    },
+    {
+      path: '/bookings-list',
+      name: 'bookings-list',
+      component: BookingsList,
       meta: {
         middleware: [Middlewares.auth]
       }

@@ -58,6 +58,7 @@ export default {
         .get('user-details')
         .then((response) => {
           context.commit('setUserDetails', response.data);
+          sessionStorage.setItem('userId', response.data.id)
           resolve(response);
         })
         .catch((error) => {

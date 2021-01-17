@@ -37,7 +37,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            :to="{ name: 'profile'}"
+            :to="{ name: 'bookings-list'}"
             color="primary"
             icon
             v-bind="attrs"

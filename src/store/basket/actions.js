@@ -17,6 +17,12 @@ export default {
     const basket = localStorage.getItem('basket');
     if (basket) {
       context.commit('setBasket', JSON.parse(basket));
+    } else {
+      localStorage.setItem('basket', []);
     }
+  },
+  clearBasket(context) {
+    context.commit('setBasket', []);
+    localStorage.setItem('basket', JSON.stringify(context.state.items));
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row v-if="itemsInBasket">
       <v-col
         cols="12"
         sm="8"
@@ -184,6 +184,56 @@
         </div>
       </v-col>
     </v-row>
+    <v-row
+      v-else
+      align="center"
+      justify="center"
+    >
+      <v-col
+      cols="12"
+      sm="8"
+      >
+        <v-banner two-line outlined>
+          <v-avatar
+            slot="icon"
+            color="primary accent-4"
+            size="40"
+          >
+            <v-icon
+              icon="mdi-lock"
+              color="white"
+            >
+              mdi-cart-outline
+            </v-icon>
+          </v-avatar>
+          <div style="display: flex;justify-content: space-between">
+            <div class="headline">
+             Your basket is empty.
+            </div>
+            <div>
+            <v-btn
+              text
+              color="primary accent-4"
+              outlined
+              class="mx-1"
+              :to="{ name: 'cars'}"
+            >
+              All Cars
+            </v-btn>
+            <v-btn
+              text
+              color="primary accent-4"
+              outlined
+              class="mx-1"
+              :to="{ name: 'bookings-list'}"
+            >
+              Your Bookings
+            </v-btn>
+            </div>
+            </div>
+        </v-banner>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -224,7 +274,8 @@ export default {
   methods: {
     ...mapActions({
       removeFromBasket: 'basket/removeFromBasket',
-      addNotification: 'application/addNotification'
+      addNotification: 'application/addNotification',
+      clearBasket: 'basket/clearBasket'
     }),
     book() {
       if (this.$refs.bookingForm.validate()) {
@@ -241,7 +292,8 @@ export default {
             }))
           })
           .then(() => {
-             this.addNotification({
+            this.clearBasket();
+            this.addNotification({
               show: true,
               text: 'Booking has been added'
             })

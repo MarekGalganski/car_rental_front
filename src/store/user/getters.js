@@ -4,5 +4,8 @@ export default {
   },
   userDetails(state) {
     return state.userDetails;
+  },
+  userId(state) {
+    return state.userDetails.id;
   }
 };
