@@ -9,6 +9,14 @@ export default {
   component: AuthLayout,
   children: [
     {
+      path: '',
+      name: 'login',
+      component: Login,
+      meta: {
+        middleware: [Middlewares.guest]
+      }
+    },
+    {
       path: 'login',
       name: 'login',
       component: Login,

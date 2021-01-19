@@ -140,7 +140,7 @@
           <div style="display: flex;justify-content: space-between">
             <span>
               <router-link
-                :to="{name: 'car', params: {id: item.car.id}}"
+                :to="{name: 'car', query: {id: item.car.id}}"
                 style="text-decoration: none;"
               >
                 {{ item.car.brand }} {{ item.car.model }}
@@ -158,7 +158,7 @@
               To <b>{{ item.to | dd.mm.yy }}</b>
             </span>
           </div>
-          <div class="d-flex align-end flex-column">
+          <div class="d-flex align-end flex-column mb-10">
             <span>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">

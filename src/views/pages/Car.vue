@@ -53,7 +53,7 @@
           class="mb-12"
         >
           <availability
-            :car-id="this.$route.params.id"
+            :car-id="this.$route.query.id"
             @availability="checkPrice($event)"
           ></availability>
           <div
@@ -136,7 +136,7 @@ export default {
   created() {
     this.loading = true;
 
-    axios.get(`cars/${this.$route.params.id}`)
+    axios.get(`cars/${this.$route.query.id}`)
       .then((response) => {
         this.car = response.data;
         this.loading = false;
@@ -156,7 +156,7 @@ export default {
         return;
       }
 
-      axios.get(`cars/${this.$route.params.id}/price?from=${this.from}&to=${this.to}`)
+      axios.get(`cars/${this.$route.query.id}/price?from=${this.from}&to=${this.to}`)
         .then((response) => {
           this.price = response.data.data;
         })

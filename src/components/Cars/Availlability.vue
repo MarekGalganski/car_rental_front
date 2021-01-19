@@ -82,6 +82,7 @@ export default {
     ...mapActions({
       addFrom: 'booking/addFrom',
       addTo: 'booking/addTo',
+      addNotification: 'application/addNotification',
     }),
     checkAvailability() {
       if (this.$refs.availabityForm.validate()) {
@@ -98,7 +99,10 @@ export default {
         })
         .catch((error) => {
           if (is422(error)) {
-            this.errors = error.response.data.errors;
+            this.addNotification({
+              show: true,
+              text: 'Select correct dates.'
+            })
           }
           this.status = error.response.status;
           this.$emit('availability', this.hasAvailability);

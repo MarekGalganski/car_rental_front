@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 import AdminRoutes from './admin/index.js';
 import AppRoutes from './app/index.js';
@@ -9,11 +8,6 @@ import AuthRoutes from './auth/index.js';
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
   AuthRoutes,
   AppRoutes,
   AdminRoutes

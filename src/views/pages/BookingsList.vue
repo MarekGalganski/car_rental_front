@@ -16,7 +16,7 @@
           color="primary"
           :to="{ name: 'profile'}"
         >
-          Change Your Details
+          Change your's profil info
         </v-btn>
       </v-col>
     </v-row>

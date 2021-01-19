@@ -63,7 +63,7 @@ export default {
   },
   beforeCreate() {
     this.loading = true;
-    let payload = {'carId': this.$route.params.id, 'pageNumber': 0};
+    let payload = {'carId': this.$route.query.id, 'pageNumber': 0};
     this.$store.dispatch('review/getList', payload)
       .then(() => {
         this.loading = false;

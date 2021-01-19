@@ -14,7 +14,7 @@
           <v-btn
             outlined
             color="white"
-            :to="{ name: 'car', params: { id: id } }"
+            :to="{ name: 'car', query: {id: id} }"
           >
             Details
           </v-btn>
